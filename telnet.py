@@ -17,14 +17,17 @@ def main(user_info, command_list, output, host):
       tn.read_until('Password: ')
       tn.write(passwd + '\n')
     command = open(command_list, "r")
-    while (cmd = command.readline()) != "" :
+    while True :
+      cmd = command.readline()
+      if cmd == "":
+        break
       tn.write(cmd + '\n')
 
     f.write(host + '\n')
     f.write(tn.read_all() + '\n')
 
 if __name__ == '__main__':
-  parser = argparse.Argumentparser()
+  parser = argparse.ArgumentParser()
   parser.add_argument("user_info",
       help="user account and password")
   parser.add_argument("command_list",
